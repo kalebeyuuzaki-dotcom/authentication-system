@@ -29,7 +29,7 @@
         </p>
 
         <!-- Seção: Progresso e Requisitos -->
-        <h2 class="fs-5 fw-bold text-dark mt-5 mb-3">🚀 Etapas de Desenvolvimento do Sistema</h2>
+        <h2 class="fs-5 fw-bold text-dark mt-5 mb-3">Etapas de Desenvolvimento do Sistema</h2>
         <div class="row g-2 mb-4">
             <div class="col-md-6">
                 <div class="p-2 border rounded bg-light-subtle small text-muted"><span
@@ -47,23 +47,6 @@
                             <div class="p-2 border rounded bg-light-subtle small text-muted"><span
                                 class="text-success fw-bold">✓</span> Ativação de conta por E-mail</div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="p-2 border rounded bg-light border-dashed small text-muted">⏳ Logs de auditoria (Em breve)
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-2 border rounded bg-light border-dashed small text-muted">⏳ Controle de acesso [Authorize]
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-2 border rounded bg-light border-dashed small text-muted">⏳ Middlewares de Exceções
-                                    Globais</div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="p-2 border rounded bg-light border-dashed small text-muted">⏳ Rate Limiting (Força Bruta)
-                                    </div>
-                                </div>
-                            </div>
 
                             <!-- Seção: Conceitos Aplicados -->
                             <h2 class="fs-5 fw-bold text-dark mt-5 mb-3">🛡️ Pilares de Segurança Implementados</h2>
@@ -73,7 +56,7 @@
                                     <h3 class="accordion-header">
                                         <button class="accordion-button collapsed fw-medium text-dark small" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                            🔑 Criptografia de Senhas (Hashing)
+                                            Criptografia de Senhas (Hashing)
                                         </button>
                                     </h3>
                                     <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#securityAccordion">
@@ -89,13 +72,15 @@
                                     <h3 class="accordion-header">
                                         <button class="accordion-button collapsed fw-medium text-dark small" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                            👁️ Confidencialidade (Proteção de Credenciais)
+                                            Confidencialidade (Proteção de Credenciais)
                                         </button>
                                     </h3>
                                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#securityAccordion">
                                         <div class="accordion-body text-secondary small bg-light-subtle">
-                                            Uso de variáveis de ambiente (<code>.env</code>) para isolar chaves secretas e credenciais do
-                                            servidor de e-mail (SMTP), garantindo que dados sensíveis nunca fiquem expostos no código-fonte
+                                            Uso de variáveis de ambiente (<code>.env</code>) para isolar chaves secretas e credenciais
+                                            do
+                                            servidor de e-mail (SMTP), garantindo que dados sensíveis nunca fiquem expostos no
+                                            código-fonte
                                             ou em repositórios públicos.
                                         </div>
                                     </div>
@@ -105,27 +90,20 @@
                                     <h3 class="accordion-header">
                                         <button class="accordion-button collapsed fw-medium text-dark small" type="button"
                                                 data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                                            🚫 Proteção contra Enumeração de Usuários (User Enumeration)
+                                            Proteção contra Enumeração de Usuários (User Enumeration)
                                         </button>
                                     </h3>
                                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#securityAccordion">
                                         <div class="accordion-body text-secondary small bg-light-subtle">
                                             Se um usuário tentar cadastrar um e-mail existente, o sistema adota a técnica do <em>Sucesso
-                                            Falso</em>. Isso impede que atacantes descubram quais e-mails possuem conta ativa mapeando
+                                            Falso</em>. Isso impede que atacantes descubram quais e-mails possuem conta ativa
+                                            mapeando
                                             mensagens de erro específicas na tela.
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-
-                            <!-- Seção: Clean Code -->
-                            <h2 class="fs-5 fw-bold text-dark mt-5 mb-3">📐 Arquitetura e Código Limpo</h2>
-                            <p class="text-secondary small bg-light p-3 rounded-3 border-start border-3 border-secondary mb-5">
-                                O fluxo de registro foi refatorado de métodos lineares para métodos privados estáticos e helpers isolados.
-                                Essa abordagem eliminou "Magic Numbers" através de constantes centralizadas e garantiu o <strong>Princípio
-                                da Responsabilidade Única (SRP)</strong> dentro da camada de serviço.
-                            </p>
 
                             <!-- Botões de Ação Inferiores -->
                             <div class="d-flex justify-content-between align-items-center pt-3 border-top mt-4">
@@ -138,8 +116,8 @@
                                     </svg>
                                     Ver meu LinkedIn
                                 </a>
-                                <a href="/Home/Index" class="btn btn-light border text-secondary px-4 py-2 small">
-                                    Sair do Painel
+                                <a href="/Login/Logout" class="btn btn-danger px-4">
+                                    Sign Out
                                 </a>
                             </div>
 

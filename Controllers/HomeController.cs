@@ -37,8 +37,16 @@ public class HomeController : Controller
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    public IActionResult Error(int? statusCode = null)
     {
+        if (statusCode.HasValue)
+        {
+            if (statusCode.Value == 429)
+            {
+                return View("TooManyRequests");
+            }
+        }
+
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

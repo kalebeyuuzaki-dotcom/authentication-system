@@ -132,7 +132,8 @@ using (var scope = app.Services.CreateScope())
 }
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseStatusCodePagesWithReExecute("/Home/TooManyRequests");
+// Agora ele vai para uma página genérica de erro ou uma página 404 específica
+app.UseStatusCodePagesWithReExecute("/Home/Error", "?statusCode={0}");
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
