@@ -98,7 +98,9 @@ namespace Portifolio.Controllers
         /// <summary>
         /// Realiza o encerramento da sessão atual do usuário limpando os cookies.
         /// </summary>
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
