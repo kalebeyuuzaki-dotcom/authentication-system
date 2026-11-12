@@ -116,10 +116,11 @@
                                     </svg>
                                     Ver meu LinkedIn
                                 </a>
-                                <a href="/Login/Logout" class="btn btn-danger px-4">
-                                    Sign Out
-                                </a>
+                                <form asp-controller="Login" asp-action="Logout" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger px-4">
+                                        Sign Out
+                                    </button>
+                                </form>
                             </div>
-
                         </div>
                     </div>
