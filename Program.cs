@@ -12,6 +12,7 @@ using Hangfire;
 using Portifolio.Services.Jobs;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
+using Portifolio.Services.DeleteAccount;
 
 Env.Load();
 
@@ -23,6 +24,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.LoginPath = "/Home/Index";
         options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+        options.Cookie.SameSite = SameSiteMode.Strict;
     });
 
 builder.Services.AddControllersWithViews();
@@ -49,6 +53,7 @@ builder.Services.AddScoped<IConfirmCodePasswordRecoverService, ConfirmCodePasswo
 builder.Services.AddScoped<IPasswordResetService, PasswordResetService>();
 builder.Services.AddScoped<IPasswordRecoveryJob, PasswordRecoveryJob>();
 builder.Services.AddScoped<IRegisterAccountJob, RegisterAccountJob>();
+builder.Services.AddScoped<IDeleteAccount, DeleteAccount>();
 
 // Configure Hangfire
 builder.Services.AddHangfire(config => config
