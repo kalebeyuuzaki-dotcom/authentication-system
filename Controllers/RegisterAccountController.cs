@@ -26,11 +26,12 @@ namespace Portifolio.Controllers
             _registerService = registerService;
             _confirmationCodeService = confirmationCodeService;
         }
-        
+
         /// <summary>
         /// Rota GET que carrega a página para criar nova conta.
         /// </summary>
         [HttpGet]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Register()
         {
             return View();
@@ -42,6 +43,7 @@ namespace Portifolio.Controllers
         /// <param name="model">Modelo de Pré-Registro a ser validado (ex: Nome, Email, Senha).</param>
         /// <returns>Redireciona o usuário para página de confirmação de código se as informações forem válidas.</returns>
         [HttpPost]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Register([FromForm] RegisterViewModel model)
         {
             if (!ModelState.IsValid)
@@ -70,6 +72,7 @@ namespace Portifolio.Controllers
         /// Rota get protegida com Token de permissão de acesso.
         /// </summary>
         [HttpGet]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult ConfirmCode()
         {
             var email = TempData.Peek(RegisterModelKey)?.ToString(); // RECEBEMOS O TEMPDATA E USAMOS O PEEK PARA SOBREVIVER AO PROX POST
@@ -91,6 +94,7 @@ namespace Portifolio.Controllers
         /// <returns>Redireciona para a página inicial/login em caso de sucesso, ou recarrega a página de 
         /// confirmação exibindo o erro correspondente.</returns>
         [HttpPost]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> VerifyCode(string code)
         {
             var email = TempData.Peek(RegisterModelKey)?.ToString() ?? string.Empty;
@@ -116,6 +120,8 @@ namespace Portifolio.Controllers
                 TempData[ErrorMessageKey] = result.ErrorMessage;
                 return RedirectToAction(nameof(ConfirmCode));
             }
+            TempData.Remove(RegisterModelKey);
+            TempData.Remove(AllowAccessConfirmationKey);
 
             TempData["SuccessMessage"] = SuccessMessage;
             return RedirectToAction("Index", "Home");
