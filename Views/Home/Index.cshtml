@@ -8,44 +8,53 @@
 <div class="m-auto text-start bg-white p-5 shadow rounded-3 border border-light-subtle" style="max-width: 460px;">
     <h2 class="fs-3 fw-bold text-dark mb-4">Entrar no sistema</h2>
      
-   @if (erroMessage != null)
-{
-    <div class="border-0 border-start border-4 border-danger ps-3 mb-4 small text-start text-dark bg-transparent" role="alert">
-        <span class="fw-semibold text-danger d-block mb-1">Erro de autenticação</span>
-        @erroMessage
-    </div>
-}
+    @if (erroMessage != null)
+    {
+        <div class="border-0 border-start border-4 border-danger ps-3 mb-4 small text-start text-dark bg-transparent"
+             role="alert">
+            <span class="fw-semibold text-danger d-block mb-1">Erro de autenticação</span>
+            @erroMessage
+        </div>
+    }
 
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="border-0 border-start border-4 border-success ps-3 mb-4 small text-start text-dark bg-transparent" role="alert">
-        <span class="fw-semibold text-success d-block mb-1">Sucesso!</span>
-        @TempData["SuccessMessage"]
-    </div>
-}
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="border-0 border-start border-4 border-success ps-3 mb-4 small text-start text-dark bg-transparent"
+             role="alert">
+            <span class="fw-semibold text-success d-block mb-1">Sucesso!</span>
+            @TempData["SuccessMessage"]
+        </div>
+    }
 
     <form asp-controller="Login" asp-action="Authenticate" method="post">
         <div class="mb-4">
             <label asp-for="Email" class="form-label text-secondary small fw-medium mb-1">E-mail</label>
-            <input asp-for="Email" class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark" placeholder="seu@email.com" />
+            <input asp-for="Email"
+                   class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark"
+                   placeholder="seu@email.com" />
             <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
         </div>
         <div class="mb-4">
             <label asp-for="Password" class="form-label text-secondary small fw-medium mb-1">Senha</label>
-            <input asp-for="Password" class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark" placeholder="Sua senha" />
+            <input asp-for="Password"
+                   class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark"
+                   placeholder="Sua senha" />
             <span asp-validation-for="Password" class="text-danger small d-block mt-1"></span>
         </div>
         <div class="mb-5 small">
             <p class="mb-2 text-muted">
-                Não tem uma conta? <a asp-controller="RegisterAccount" asp-action="Register" class="text-decoration-none text-primary fw-medium">Criar nova conta</a>
+                Não tem uma conta? <a asp-controller="RegisterAccount" asp-action="Register"
+                                      class="text-decoration-none text-primary fw-medium">Criar nova conta</a>
             </p>
             <p class="mb-0">
-                <a asp-controller="ForgotPassword" asp-action="ForgotPassword" class="text-decoration-none text-primary fw-medium">Esqueci minha senha</a>
+                <a asp-controller="ForgotPassword" asp-action="ForgotPassword"
+                   class="text-decoration-none text-primary fw-medium">Esqueci minha senha</a>
             </p>
         </div>
 
         <div class="d-flex justify-content-end gap-2">
-            <a href="javascript:history.back()" class="btn btn-light border-0 text-secondary px-4 py-2 small" style="min-width: 100px;">
+            <a href="javascript:void(0)" onclick="window.location.replace('/Home/Index');"
+               class="btn btn-light border-0 text-secondary px-4 py-2 small" style="min-width: 100px;">
                 Voltar
             </a>
             <button class="btn btn-primary px-4 py-2 small" type="submit" style="min-width: 100px;">
@@ -57,4 +66,13 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Força o reload caso o usuário use o botão "Voltar" do navegador (evita bfcache)
+        window.addEventListener("pageshow", function (event) {
+            var navType = performance.getEntriesByType("navigation")[0]?.type;
+            if (event.persisted || navType === "back_forward") {
+                window.location.reload();
+            }
+        });
+    </script>
 }
