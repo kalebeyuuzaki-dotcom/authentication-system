@@ -116,6 +116,11 @@
                                     </svg>
                                     Ver meu LinkedIn
                                 </a>
+                                <form asp-controller="Login" asp-action="ConfirmDeleteAccount" method="get">
+                                    <button type="submit" class="btn btn-danger px-4">
+                                        Excluir minha conta
+                                    </button>
+                                </form>
                                 <form asp-controller="Login" asp-action="Logout" method="post" class="d-inline">
                                     <button type="submit" class="btn btn-danger px-4">
                                         Sign Out
@@ -124,3 +129,10 @@
                             </div>
                         </div>
                     </div>
+
+                    <script>
+                            // Substitui a entrada atual no histórico para que o botão "Voltar" ignore a tela de código
+                            if (window.history.replaceState) {
+                                window.history.replaceState(null, null, window.location.href);
+                            }
+                    </script>

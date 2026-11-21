@@ -1,4 +1,3 @@
-@using System.Text.Json
 @model Portifolio.Models.ViewModels.RegisterViewModel
 
 @{
@@ -14,7 +13,8 @@
      
     @if (TempData["ErrorMessage"] != null)
     {
-        <div class="border-0 border-start border-4 border-danger ps-3 mb-4 small text-start text-dark bg-transparent" role="alert">
+        <div class="border-0 border-start border-4 border-danger ps-3 mb-4 small text-start text-dark bg-transparent"
+             role="alert">
             <span class="fw-semibold text-danger d-block mb-1">Erro de verificação</span>
             @TempData["ErrorMessage"]
         </div>
@@ -27,20 +27,25 @@
     <form asp-controller="RegisterAccount" asp-action="VerifyCode" method="post">
         <div class="mb-4">
             <label class="form-label text-secondary small fw-medium mb-2">
-                Insira o Código de Verificação enviado para o email <span class="text-dark fw-semibold">@maskedEmail</span>
+                Insira o Código de Verificação enviado para o email <span
+                class="text-dark fw-semibold">@maskedEmail</span>
             </label>
-            <input name="code" class="form-control text-center fs-4 border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark" 
+            <input name="code"
+                   class="form-control text-center fs-4 border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark"
                    placeholder="000000" maxlength="6" pattern="\d{6}" inputmode="numeric" required />
         </div>
         <div class="mb-5 small">
             <p class="mb-0 text-muted">
-                Não recebeu o código? <a href="/RegisterAccount/Register" class="text-decoration-none text-primary fw-medium">Voltar para o Cadastro</a>
+                Não recebeu o código?
+                <a href="javascript:void(0);" onclick="window.location.replace('/RegisterAccount/Register');"
+                   class="text-decoration-none text-primary fw-medium">Voltar para o Cadastro</a>
             </p>
         </div>
         <div class="d-flex justify-content-end gap-2">
-            <a href="/Login/Index" class="btn btn-light border-0 text-secondary px-4 py-2 small" style="min-width: 100px;">
+            <button type="button" onclick="window.location.replace('/Login/Index');"
+                    class="btn btn-light border-0 text-secondary px-4 py-2 small" style="min-width: 100px;">
                 Cancelar
-            </a>
+            </button>
             <button class="btn btn-primary px-4 py-2 small" type="submit" style="min-width: 150px;">
                 Verificar Código
             </button>
@@ -50,4 +55,13 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Força o reload caso o usuário use o botão "Voltar" do navegador (evita bfcache)
+        window.addEventListener("pageshow", function (event) {
+            var navType = performance.getEntriesByType("navigation")[0]?.type;
+            if (event.persisted || navType === "back_forward") {
+                window.location.reload();
+            }
+        });
+    </script>
 }

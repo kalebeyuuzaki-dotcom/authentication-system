@@ -10,7 +10,8 @@
      
     @if (TempData["ErrorMessage"] != null)
     {
-        <div class="border-0 border-start border-4 border-danger ps-3 mb-4 small text-start text-dark bg-transparent" role="alert">
+        <div class="border-0 border-start border-4 border-danger ps-3 mb-4 small text-start text-dark bg-transparent"
+             role="alert">
             <span class="fw-semibold text-danger d-block mb-1">Erro no cadastro</span>
             @TempData["ErrorMessage"]
         </div>
@@ -21,52 +22,73 @@
         <!-- Campo Nome Completo -->
         <div class="mb-4">
             <label asp-for="Name" class="form-label text-secondary small fw-medium mb-1">Nome Completo</label>
-            <input asp-for="Name" class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark" placeholder="Seu nome e sobrenome" />
+            <input asp-for="Name"
+                   class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark"
+                   placeholder="Seu nome e sobrenome" />
             <span asp-validation-for="Name" class="text-danger small d-block mt-1"></span>
         </div>
 
         <!-- Campo E-mail -->
         <div class="mb-4">
             <label asp-for="Email" class="form-label text-secondary small fw-medium mb-1">Email</label>
-            <input asp-for="Email" class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark" placeholder="seu@email.com" />
+            <input asp-for="Email"
+                   class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark"
+                   placeholder="seu@email.com" />
             <span asp-validation-for="Email" class="text-danger small d-block mt-1"></span>
         </div>
 
         <!-- Campo Senha -->
         <div class="mb-4">
             <label asp-for="Password" class="form-label text-secondary small fw-medium mb-1">Senha</label>
-            <input asp-for="Password" class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark" placeholder="Sua senha" />
+            <input asp-for="Password"
+                   class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark"
+                   placeholder="Sua senha" />
             <span asp-validation-for="Password" class="text-danger small d-block mt-1"></span>
         </div>
 
         <!-- Campo Confirmar Senha -->
         <div class="mb-4">
-            <label asp-for="ConfirmPassword" class="form-label text-secondary small fw-medium mb-1">Confirmar Senha</label>
-            <input asp-for="ConfirmPassword" class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark" placeholder="Digite a senha novamente" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger small d-block mt-1"></span>
-        </div>
+            <label asp-for="ConfirmPassword" class="form-label text-secondary small fw-medium mb-1">Confirmar
+                Senha</label>
+                <input asp-for="ConfirmPassword"
+                       class="form-control border-0 border-bottom border-secondary-subtle rounded-0 bg-transparent shadow-none px-0 py-2 text-dark"
+                       placeholder="Digite a senha novamente" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger small d-block mt-1"></span>
+            </div>
 
-        <!-- Bloco de Suporte integrado logo abaixo dos inputs -->
-        <div class="mb-5 small">
-            <p class="mb-0 text-muted">
-                Já possui uma conta? <a href="/Home/Index" class="text-decoration-none text-primary fw-medium">Voltar para o Login</a>
-            </p>
-        </div>
+            <!-- Bloco de Suporte integrado logo abaixo dos inputs -->
+            <div class="mb-5 small">
+                <p class="mb-0 text-muted">
+                    Já possui uma conta? <a href="javascript:void(0)" onclick="window.location.replace('/Home/Index');"
+                                        class="text-decoration-none text-primary fw-medium">Voltar
+                    para o Login</a>
+                </p>
+            </div>
 
-        <!-- Ações do Formulário alinhadas à direita -->
-        <div class="d-flex justify-content-end gap-2">
-            <a href="/Home/Index" class="btn btn-light border-0 text-secondary px-4 py-2 small" style="min-width: 100px;">
-                Cancelar
-            </a>
-            <button class="btn btn-primary px-4 py-2 small" type="submit" style="min-width: 100px;">
-                Cadastrar
-            </button>
-        </div>
+            <!-- Ações do Formulário alinhadas à direita -->
+            <div class="d-flex justify-content-end gap-2">
+                <a href="javascript:void(0)" onclick="window.location.replace('/Home/Index');"
+                   class="btn btn-light border-0 text-secondary px-4 py-2 small" style="min-width: 100px;">
+                    Cancelar
+                </a>
+                <button class="btn btn-primary px-4 py-2 small" type="submit" style="min-width: 100px;">
+                    Cadastrar
+                </button>
+            </div>
 
-    </form>
+        </form>
 
-</div>
+    </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+        <script>
+            // Força o reload caso o usuário use o botão "Voltar" do navegador (evita bfcache)
+            window.addEventListener("pageshow", function (event) {
+                var navType = performance.getEntriesByType("navigation")[0]?.type;
+                if (event.persisted || navType === "back_forward") {
+                    window.location.reload();
+                }
+            });
+        </script>
+    }
