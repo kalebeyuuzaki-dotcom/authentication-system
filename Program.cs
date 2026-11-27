@@ -39,7 +39,7 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("A string de conexão 'DefaultConnection' não foi encontrada.");
 }
 
-// DbContext
+// DbContext using ConnectionString
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
